@@ -1,0 +1,8 @@
+{
+  "name": "RecipeDB",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue",
+  "id": "6af81e05"
+}
