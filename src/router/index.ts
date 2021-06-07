@@ -1,14 +1,29 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
+import Tabs from '../views/Tabs.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '',
-    redirect: '/folder/Inbox'
+    path: '/',
+    redirect: '/tabs/recipes'
   },
   {
-    path: '/folder/:id',
-    component: () => import ('../views/Folder.vue')
+    path: '/tabs/',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        redirect: '/tabs/recipes'
+      },
+      {
+        path: 'recipes',
+        component: () => import('@/views/Recipes.vue')
+      },
+      {
+        path: 'ingredients',
+        component: () => import('@/views/Ingredients.vue')
+      },
+    ]
   }
 ]
 
