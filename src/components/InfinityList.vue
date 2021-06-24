@@ -26,7 +26,7 @@
             @ionInfinite="extentContentList($event)" 
             threshold="100px" 
             id="infinite-scroll"
-            :disabled="disableInfiniteScroll"
+            :disabled="infiniteScrollDisabled"
           >
             <ion-infinite-scroll-content
               loading-spinner="bubbles">
@@ -86,12 +86,12 @@
         type: Number,
         default: 5
       },
-      disableInfiniteScroll: Boolean,
     },
     data() {
       return {
         contentList: [],
-        numShownElems: this.initialNumShownElems
+        numShownElems: this.initialNumShownElems,
+        infiniteScrollDisabled: false
       }
     },
     computed: {
@@ -117,13 +117,14 @@
         console.debug("refreshContentList");
         await this.updateContentList();
         this.numShownElems = this.initialNumShownElems;
+        this.infiniteScrollDisabled = false
         event.target.complete();
       },
       extentContentList(event: any) {
         console.debug("extentContentList");
         if(this.numShownElems + 3 >= this.contentList.length){
           this.numShownElems = this.contentList.length;
-          event.target.disabled = true;
+          this.infiniteScrollDisabled = true;
         } else {
           this.numShownElems += 3;
         }
