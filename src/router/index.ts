@@ -20,6 +20,17 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Recipes.vue')
       },
       {
+        path: "recipe/:id",
+        component: () => import('@/views/Recipe.vue'),
+        props: (route) => {
+          const id = Number.parseInt((route.params.id as string))
+          if (Number.isNaN(id)) {
+            return -1
+          }
+          return { id }
+        }
+      },
+      {
         path: 'ingredients',
         component: () => import('@/views/Ingredients.vue')
       },
