@@ -1,60 +1,36 @@
 <template>
   <UpdatableCard
     detailUrl="tabs/recipe/"
-    :title="recipeName"
+    :title="recipeData.name"
     :id="id"
     :lastUpdate="lastUpdate"
     @cardDataUpdated="updateRecipeData"
   >
-    Dauert {{prepTimeStr}} <br>
-    Quelle: {{source}} <br>
-    Stichwörter: {{labelsStr}} <br>
-    Zutaten: {{ingredientsStr}}
+    <PrepTimeLabel :prepTime="recipeData.prepTime"></PrepTimeLabel>
   </UpdatableCard>
 </template>
 
 <script lang="ts">
   import UpdatableCard from '@/components/UpdatableCard.vue';
+  import PrepTimeLabel from "@/components/recipe/PrepTimeLabel.vue"
   import { defineComponent } from 'vue';
   import { getRecipeData } from '@/api/recipeDetails' 
   export default defineComponent({
     name: 'RecipeCard',
-    components: { UpdatableCard },
+    components: { UpdatableCard, PrepTimeLabel },
     props: {
       id: Number,
       lastUpdate: Number
     },
     data (){
       return {
-        recipeName: "Rezept " + this.id,
-        prepTime: 0,
-        source: "???",
-        labels: [],
-        ingredients: [],
-      }
-    },
-    computed: {
-      prepTimeStr(): string {
-        return this.prepTime + " min"
-      },
-      labelsStr(): string {
-        return this.labels.join(", ")
-      },
-      ingredientsStr(): string {
-        return this.ingredients.map((ingredient: any) => {
-          return ingredient.quantity + "" + ingredient.unit + " " + ingredient.name
-        }).join(", ")
+        recipeData: {},
       }
     },
     methods: {
       async updateRecipeData() {
         console.debug("updateRecipeData of recipe " + this.id)
-        const recipeData = await getRecipeData(this.id);
-        this.recipeName = recipeData.name;
-        this.prepTime = recipeData.prepTime;
-        this.source = recipeData.source;
-        this.labels = recipeData.labels.map(label => label.name)
-        this.ingredients = recipeData.ingredients;
+        this.recipeData = await getRecipeData(this.id);
       },
     },
 })

@@ -1,22 +1,19 @@
 <template>
-  <div>
-    <ion-icon :icon="timeOutline"></ion-icon>
+  <IconLabel :icon="timeOutline" :loaded="prepTime !== undefined">
     <span v-if="fullHours > 0"><b>{{fullHours}}</b>h </span>
     <span><b>{{remaindingMinutes}}</b>min</span>
-  </div>
+  </IconLabel>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import IconLabel from "@/components/recipe/IconLabel.vue"
+  import { defineComponent} from 'vue';
   import { timeOutline } from 'ionicons/icons';
   export default defineComponent({
     name: 'PrepTimeLabel',
-    components: {},
+    components: { IconLabel },
     props: {
-      prepTime: {
-        type: Number,
-        required: true
-      },
+      prepTime: Number,
     },
     setup() {
       return {

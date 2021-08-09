@@ -1,7 +1,10 @@
 <template>
   <IonCard :href="detailUrl? detailUrl + id: 'javascript:'">
     <IonCardHeader>
-      <IonCardTitle>{{title}}</IonCardTitle>
+      <IonCardTitle>
+        <span v-if="title">{{title}}</span>
+        <ion-skeleton-text v-if="!title" animated></ion-skeleton-text>
+      </IonCardTitle>
     </IonCardHeader>
 
     <IonCardContent>
@@ -11,20 +14,17 @@
 </template>
 
 <script lang="ts">
-  import { IonCard, IonCardContent, IonCardTitle, IonCardHeader } from '@ionic/vue';
+  import { IonCard, IonCardContent, IonCardTitle, IonCardHeader, IonSkeletonText } from '@ionic/vue';
   import { defineComponent } from 'vue';
   export default defineComponent({
     name: 'UpdatableCard',
-    components: { IonCard, IonCardContent, IonCardTitle, IonCardHeader },
+    components: { IonCard, IonCardContent, IonCardTitle, IonCardHeader, IonSkeletonText },
     props: {
+      title: String,
       detailUrl: {
         type: String,
         required: false,
         default: null
-      },
-      title: {
-        type: String,
-        required: true
       },
       id: {
         type: Number,

@@ -2,7 +2,10 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>{{title}}</ion-title>
+        <ion-title>
+          <span v-if="title">{{title}}</span>
+          <ion-skeleton-text v-if="!title" animated></ion-skeleton-text>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <slot></slot>
@@ -10,27 +13,14 @@
 </template>
 
 <script lang="ts">
-  import {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-  } from '@ionic/vue';
+  import { IonPage, IonHeader, IonToolbar, IonTitle, IonSkeletonText } from '@ionic/vue';
   import { defineComponent } from 'vue';
 
   export default defineComponent({
     name: 'PageWithHeader',
-    components: {
-      IonPage,
-      IonHeader,
-      IonToolbar,
-      IonTitle,
-    },
+    components: { IonPage, IonHeader, IonToolbar, IonTitle, IonSkeletonText },
     props: {
-      title: {
-        type: String,
-        required: true
-      },
+      title: String,
     },
   })
 </script>

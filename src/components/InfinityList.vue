@@ -1,5 +1,5 @@
 <template>
-  <ion-content :fullscreen="true">
+  <ion-content>
     <ion-refresher slot="fixed" @ionRefresh="refreshContentList($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
