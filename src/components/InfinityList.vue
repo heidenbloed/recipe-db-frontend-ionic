@@ -1,50 +1,31 @@
 <template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>{{title}}</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">{{title}}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <IonContent>
-        <ion-refresher slot="fixed" @ionRefresh="refreshContentList($event)">
-          <ion-refresher-content></ion-refresher-content>
-        </ion-refresher>
-        <IonGrid fixed>
-          <slot
-            v-for="elem in shownContentList"
-            :id="elem.id"
-            :lastUpdate="elem.lastUpdate"
-            :key="elem.id"
-          ></slot>
-          <ion-infinite-scroll
-            @ionInfinite="extentContentList($event)" 
-            threshold="100px" 
-            id="infinite-scroll"
-            :disabled="infiniteScrollDisabled"
-          >
-            <ion-infinite-scroll-content
-              loading-spinner="bubbles">
-            </ion-infinite-scroll-content>
-          </ion-infinite-scroll>
-        </IonGrid>
-      </IonContent>
-    
-    </ion-content>
-  </ion-page>
+  <ion-content :fullscreen="true">
+    <ion-refresher slot="fixed" @ionRefresh="refreshContentList($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <IonGrid fixed>
+      <slot
+        v-for="elem in shownContentList"
+        :id="elem.id"
+        :lastUpdate="elem.lastUpdate"
+        :key="elem.id"
+      ></slot>
+      <ion-infinite-scroll
+        @ionInfinite="extentContentList($event)" 
+        threshold="100px" 
+        id="infinite-scroll"
+        :disabled="infiniteScrollDisabled"
+      >
+        <ion-infinite-scroll-content
+          loading-spinner="bubbles">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </IonGrid>
+  </ion-content>
 </template>
 
 <script lang="ts">
   import {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent, 
     IonGrid, 
     IonInfiniteScroll, 
@@ -53,19 +34,11 @@
     IonRefresherContent
   } from '@ionic/vue';
   import { defineComponent } from 'vue';
-  import { recipeDbApi } from './../axios-common';
-
-  interface UpdateableSlot {
-    updateData(): void;
-  }
+  import { recipeDbApi } from '@/axios-common';
 
   export default defineComponent({
     name: 'InfinityList',
     components: {
-      IonPage,
-      IonHeader,
-      IonToolbar,
-      IonTitle,
       IonContent,
       IonGrid,
       IonInfiniteScroll,
@@ -74,10 +47,6 @@
       IonRefresherContent
     },
     props: {
-      title: {
-        type: String,
-        required: true
-      },
       apiUrl: {
         type: String,
         required: true

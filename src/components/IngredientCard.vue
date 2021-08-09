@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-  import UpdatableCard from './UpdatableCard.vue';
+  import UpdatableCard from '@/components/UpdatableCard.vue';
   import { defineComponent } from 'vue';
   export default defineComponent({
     name: 'IngredientCard',

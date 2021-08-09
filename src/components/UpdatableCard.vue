@@ -1,5 +1,5 @@
 <template>
-  <IonCard>
+  <IonCard :href="detailUrl? detailUrl + id: 'javascript:'">
     <IonCardHeader>
       <IonCardTitle>{{title}}</IonCardTitle>
     </IonCardHeader>
@@ -12,15 +12,15 @@
 
 <script lang="ts">
   import { IonCard, IonCardContent, IonCardTitle, IonCardHeader } from '@ionic/vue';
-  import { recipeDbApi } from './../axios-common';
   import { defineComponent } from 'vue';
   export default defineComponent({
     name: 'UpdatableCard',
     components: { IonCard, IonCardContent, IonCardTitle, IonCardHeader },
     props: {
-      apiUrl: {
+      detailUrl: {
         type: String,
-        required: true
+        required: false,
+        default: null
       },
       title: {
         type: String,
@@ -42,9 +42,7 @@
     methods: {
       async updateData() {
         console.debug("updateData of card " + this.id)
-        const response = await recipeDbApi.get(this.apiUrl + this.id + "/");
-        const cardData = response.data;
-        this.$emit('cardDataUpdated', cardData);
+        this.$emit('cardDataUpdated');
       },
     },
     watch: {

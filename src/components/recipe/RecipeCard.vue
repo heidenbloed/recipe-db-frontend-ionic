@@ -1,6 +1,6 @@
 <template>
   <UpdatableCard
-    apiUrl="recipes/"
+    detailUrl="tabs/recipe/"
     :title="recipeName"
     :id="id"
     :lastUpdate="lastUpdate"
@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-  import UpdatableCard from './UpdatableCard.vue';
-  import { recipeDbApi } from './../axios-common';
+  import UpdatableCard from '@/components/UpdatableCard.vue';
   import { defineComponent } from 'vue';
+  import { getRecipeData } from '@/api/recipeDetails' 
   export default defineComponent({
     name: 'RecipeCard',
     components: { UpdatableCard },
@@ -47,28 +47,15 @@
       }
     },
     methods: {
-      async updateRecipeData(recipeData: any) {
+      async updateRecipeData() {
         console.debug("updateRecipeData of recipe " + this.id)
+        const recipeData = await getRecipeData(this.id);
         this.recipeName = recipeData.name;
-        this.prepTime = recipeData.preparation_time;
+        this.prepTime = recipeData.prepTime;
         this.source = recipeData.source;
-        this.labels = await Promise.all(recipeData.labels.map(this.getLabelName));
-        this.ingredients = await Promise.all(recipeData.quantified_ingredients.map(this.getQuantifiedIngredientData));
+        this.labels = recipeData.labels.map(label => label.name)
+        this.ingredients = recipeData.ingredients;
       },
-      async getLabelName(labelId: number): Promise<string> {
-        const response = await recipeDbApi.get("labels/" + labelId + "/")
-        return response.data.name
-      },
-      async getQuantifiedIngredientData(quantfiedIngredientId: number): Promise<any> {
-        const quantIngredientResponse = await recipeDbApi.get("quantified_ingredients/" + quantfiedIngredientId + "/")
-        const ingredientResponse = await recipeDbApi.get("ingredients/" + quantIngredientResponse.data.ingredient + "/")
-        const unitResponse = await recipeDbApi.get("units/" + ingredientResponse.data.unit + "/")
-        return {
-          name: ingredientResponse.data.name,
-          unit: unitResponse.data.short_form,
-          quantity: quantIngredientResponse.data.quantity
-        }
-      }
     },
 })
 </script>
