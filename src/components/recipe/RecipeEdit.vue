@@ -2,45 +2,27 @@
   <PageWithHeader :title="title">
     <template v-slot:toolbar>
       <ion-buttons slot="primary">
-        <ion-button :href="$route.path + '/edit'">
-          <ion-icon slot="icon-only" :icon="pencilOutline"/>
+        <ion-button>
+          <ion-icon slot="icon-only" :icon="saveOutline"/>
         </ion-button>
       </ion-buttons>
     </template>
 
     <ion-content class="ion-padding">
-      <RecipeImageSlides :imageUrls="recipeImageUrls"/>
-
-      <PrepTimeLabel :prepTime="recipeData.prepTime"></PrepTimeLabel>
-      <IconLabel :icon="bookOutline" :loaded="recipeData.source !== undefined">
-        {{recipeData.source}}
-      </IconLabel>
-
-      <p class="section">Zutaten</p>
-      <ion-skeleton-text v-if="!recipeData.ingredients" animated/>
-      <div v-for="ingr in recipeData.ingredients" :key="ingr.id">
-        {{ingr.quantity}} {{ingr.unit}} {{ingr.name}}
-      </div>
-
-      <p class="section">Schlagwörter</p>
-      <ion-skeleton-text v-if="!recipeData.labels" animated/>
-      <RecipeLabelBadge v-for="label in recipeData.labels" :key="label.id" :category="label.category">
-        {{label.name}}
-      </RecipeLabelBadge>
+      <RecipeImageEdit :imageUrls="recipeImageUrls"/>
     </ion-content>
   </PageWithHeader>
 </template>
 
 <script lang="js">
   import PageWithHeader from "@/components/PageWithHeader.vue";
-  import PrepTimeLabel from "@/components/recipe/PrepTimeLabel.vue"
   import IconLabel from "@/components/recipe/IconLabel.vue"
-  import RecipeLabelBadge from "@/components/recipe/RecipeLabelBadge.vue"
-  import RecipeImageSlides from "@/components/recipe/RecipeImageSlides.vue"
+  import RecipeImageEdit from "@/components/recipe/RecipeImageEdit.vue"
   import { defineComponent } from 'vue';
   import { IonContent, IonSkeletonText, IonButtons, IonButton, IonIcon } from '@ionic/vue';
-  import { bookOutline, pencilOutline } from 'ionicons/icons';
+  import { saveOutline } from 'ionicons/icons';
   import { getRecipeData } from '@/api/recipeDetails' 
+
   export default defineComponent({
     name: 'RecipeDetail',
     components: {
@@ -49,11 +31,7 @@
       IonButton,
       IonIcon,
       IonContent,
-      PrepTimeLabel,
-      IconLabel,
-      IonSkeletonText,
-      RecipeLabelBadge,
-      RecipeImageSlides,
+      RecipeImageEdit
     },
     props: {
       id: {
@@ -63,8 +41,7 @@
     },
     setup() {
       return {
-        bookOutline,
-        pencilOutline,
+        saveOutline,
       }
     },
     data() {

@@ -6,6 +6,8 @@
     :lastUpdate="lastUpdate"
     @cardDataUpdated="updateRecipeData"
   >
+    <RecipeImageSlides :imageUrls="recipeImageUrls" onlyFirstImage/>
+
     <PrepTimeLabel :prepTime="recipeData.prepTime"></PrepTimeLabel>
   </UpdatableCard>
 </template>
@@ -13,11 +15,12 @@
 <script lang="js">
   import UpdatableCard from '@/components/UpdatableCard.vue';
   import PrepTimeLabel from "@/components/recipe/PrepTimeLabel.vue"
+  import RecipeImageSlides from "@/components/recipe/RecipeImageSlides.vue"
   import { defineComponent } from 'vue';
   import { getRecipeData } from '@/api/recipeDetails' 
   export default defineComponent({
     name: 'RecipeCard',
-    components: { UpdatableCard, PrepTimeLabel },
+    components: { UpdatableCard, PrepTimeLabel, RecipeImageSlides },
     props: {
       id: Number,
       lastUpdate: Number
@@ -26,6 +29,15 @@
       return {
         recipeData: {},
       }
+    },
+    computed: {
+      recipeImageUrls() {
+        if (this.recipeData.images) {
+          return this.recipeData.images.map((imgData) => {return imgData.imageUrl});
+        } else {
+          return undefined;
+        }
+      },
     },
     methods: {
       async updateRecipeData() {
