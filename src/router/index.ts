@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import Tabs from '../views/Tabs.vue'
+import Tabs from '@/views/Tabs.vue'
+import RecipesView from '@/views/RecipesView.vue'
+import RecipeView from '@/views/RecipeView.vue'
+import RecipeEditView from '@/views/RecipeEditView.vue'
+import IngredientsView from '@/views/IngredientsView.vue'
+import ShoppingListView from '@/views/ShoppingListView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,26 +22,23 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'recipes',
-        component: () => import('@/views/Recipes.vue')
+        component: RecipesView,
       },
       {
         path: "recipe/:id",
-        component: () => import('@/views/Recipe.vue'),
-        props: (route) => {
-          const id = Number.parseInt((route.params.id as string))
-          if (Number.isNaN(id)) {
-            return -1
-          }
-          return { id }
-        }
+        component: RecipeView,
+      },
+      {
+        path: "recipe/:id/edit",
+        component: RecipeEditView,
       },
       {
         path: 'ingredients',
-        component: () => import('@/views/Ingredients.vue')
+        component: IngredientsView
       },
       {
         path: 'shoppinglist',
-        component: () => import('@/views/ShoppingList.vue')
+        component: ShoppingListView
       },
     ]
   }
