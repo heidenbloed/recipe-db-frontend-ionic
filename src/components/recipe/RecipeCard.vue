@@ -10,7 +10,7 @@
   </UpdatableCard>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import UpdatableCard from '@/components/UpdatableCard.vue';
   import PrepTimeLabel from "@/components/recipe/PrepTimeLabel.vue"
   import { defineComponent } from 'vue';

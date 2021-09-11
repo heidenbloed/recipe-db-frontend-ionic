@@ -24,7 +24,7 @@
   </ion-content>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import {
     IonContent, 
     IonGrid, 
@@ -75,21 +75,21 @@
       async updateContentList() {
         console.debug("updateContentList");
         const response = await recipeDbApi.get(this.apiUrl);
-        this.contentList = response.data.map((elem: any) => {
+        this.contentList = response.data.map((elem) => {
           return {
             id: elem.id,
             lastUpdate: elem.updated_at
           }
         });
       },
-      async refreshContentList(event: any) {
+      async refreshContentList(event) {
         console.debug("refreshContentList");
         await this.updateContentList();
         this.numShownElems = this.initialNumShownElems;
         this.infiniteScrollDisabled = false
         event.target.complete();
       },
-      extentContentList(event: any) {
+      extentContentList(event) {
         console.debug("extentContentList");
         if(this.numShownElems + 3 >= this.contentList.length){
           this.numShownElems = this.contentList.length;

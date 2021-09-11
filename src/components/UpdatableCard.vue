@@ -13,7 +13,7 @@
   </IonCard>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import { IonCard, IonCardContent, IonCardTitle, IonCardHeader, IonSkeletonText } from '@ionic/vue';
   import { defineComponent } from 'vue';
   export default defineComponent({
@@ -51,5 +51,5 @@
         await this.updateData();
       }
     }
-})
+  })
 </script>

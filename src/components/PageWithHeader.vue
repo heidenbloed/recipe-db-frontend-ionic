@@ -4,11 +4,12 @@
       <ion-toolbar>
         <ion-title>
           <span v-if="title">{{title}}</span>
-          <ion-skeleton-text v-if="!title" animated></ion-skeleton-text>
+          <ion-skeleton-text v-if="!title" animated/>
         </ion-title>
+        <slot name="toolbar"/>
       </ion-toolbar>
     </ion-header>
-    <slot></slot>
+    <slot/>
   </ion-page>
 </template>
 

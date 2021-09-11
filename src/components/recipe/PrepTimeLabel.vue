@@ -5,7 +5,7 @@
   </IconLabel>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import IconLabel from "@/components/recipe/IconLabel.vue"
   import { defineComponent} from 'vue';
   import { timeOutline } from 'ionicons/icons';
@@ -21,10 +21,10 @@
       }
     },
     computed: {
-      fullHours(): number {
+      fullHours() {
         return Math.floor(this.prepTime / 60);
       },
-      remaindingMinutes(): number {
+      remaindingMinutes() {
         return this.prepTime % 60;
       },
     },

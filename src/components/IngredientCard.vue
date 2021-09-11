@@ -10,7 +10,7 @@
   </UpdatableCard>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import UpdatableCard from '@/components/UpdatableCard.vue';
   import { defineComponent } from 'vue';
   export default defineComponent({
@@ -28,7 +28,7 @@
       }
     },
     methods: {
-      async updateIngredientData(ingredientData: any) {
+      async updateIngredientData(ingredientData) {
         console.debug("updateIngredientData of ingredient " + this.id)
         this.ingredientData = ingredientData;
       },

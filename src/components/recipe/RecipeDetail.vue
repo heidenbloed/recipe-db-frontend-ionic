@@ -10,7 +10,7 @@
   </PageWithHeader>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import PageWithHeader from "@/components/PageWithHeader.vue";
   import PrepTimeLabel from "@/components/recipe/PrepTimeLabel.vue"
   import IconLabel from "@/components/recipe/IconLabel.vue"
