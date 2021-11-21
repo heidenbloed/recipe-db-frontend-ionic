@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import App from './App.vue'
+import { createApp } from 'vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import App from './App.vue';
 import router from './router';
 
 import { IonicVue } from '@ionic/vue';
@@ -24,6 +24,9 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/global.css';
+
+import './registerServiceWorker';
 
 const app = createApp(App)
   .use(IonicVue)

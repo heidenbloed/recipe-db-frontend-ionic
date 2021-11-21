@@ -1,6 +1,6 @@
 <template>
   <UpdatableCard
-    detailUrl="tabs/recipe/"
+    detailUrl="/tabs/recipe/"
     :title="recipeData.name"
     :id="id"
     :lastUpdate="lastUpdate"

@@ -2,7 +2,7 @@
   <PageWithHeader :title="title">
     <template v-slot:toolbar>
       <ion-buttons slot="primary">
-        <ion-button :href="$route.path + '/edit'">
+        <ion-button @click="$router.push('edit')">
           <ion-icon slot="icon-only" :icon="pencilOutline"/>
         </ion-button>
       </ion-buttons>

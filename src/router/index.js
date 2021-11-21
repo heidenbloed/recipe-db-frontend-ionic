@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
 import Tabs from '@/views/Tabs.vue'
 import RecipesView from '@/views/RecipesView.vue'
 import RecipeView from '@/views/RecipeView.vue'
@@ -7,10 +6,10 @@ import RecipeEditView from '@/views/RecipeEditView.vue'
 import IngredientsView from '@/views/IngredientsView.vue'
 import ShoppingListView from '@/views/ShoppingListView.vue'
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: '/',
-    redirect: '/tabs/recipes'
+    redirect: '/tabs/recipes/'
   },
   {
     path: '/tabs/',
@@ -18,14 +17,14 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/tabs/recipes'
+        redirect: 'recipes/'
       },
       {
-        path: 'recipes',
+        path: 'recipes/',
         component: RecipesView,
       },
       {
-        path: "recipe/:id",
+        path: "recipe/:id/",
         component: RecipeView,
       },
       {
@@ -33,11 +32,11 @@ const routes: Array<RouteRecordRaw> = [
         component: RecipeEditView,
       },
       {
-        path: 'ingredients',
+        path: 'ingredients/',
         component: IngredientsView
       },
       {
-        path: 'shoppinglist',
+        path: 'shoppinglist/',
         component: ShoppingListView
       },
     ]

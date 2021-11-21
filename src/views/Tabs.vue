@@ -22,11 +22,11 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { fastFoodOutline, restaurantOutline, listOutline } from 'ionicons/icons';
 export default {
-  name: 'Tabs',
+  name: 'TabsView',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
   setup() {
     return {

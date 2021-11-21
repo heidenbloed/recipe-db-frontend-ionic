@@ -7,7 +7,7 @@
   import { defineComponent } from 'vue';
 
   export default defineComponent({
-    name: 'Recipe',
+    name: 'RecipeView',
     components: { RecipeDetail },
     computed: {
       id() {

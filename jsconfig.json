@@ -1,0 +1,10 @@
+{
+  "include": [
+    "src/**/*.vue",
+    "src/main.js",
+    "src/router/index.js",
+    "src/axios-common.js",
+    "src/shims-vue.d.js",
+    "src/registerServiceWorker.js"
+  ],
+}

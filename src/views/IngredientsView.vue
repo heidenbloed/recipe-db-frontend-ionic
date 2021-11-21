@@ -13,13 +13,13 @@
   </PageWithHeader>
 </template>
 
-<script lang="ts">
+<script lang="js">
   import PageWithHeader from "@/components/PageWithHeader.vue";
   import IngredientCard from "@/components/IngredientCard.vue";
   import InfinityList from "@/components/InfinityList.vue";
   import { defineComponent } from 'vue';
   export default defineComponent({
-    name: 'Ingredients',
+    name: 'IngredientsView',
     components: { PageWithHeader, IngredientCard, InfinityList }
   })
 </script>

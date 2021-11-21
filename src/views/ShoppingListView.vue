@@ -4,10 +4,10 @@
   </PageWithHeader>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import PageWithHeader from "@/components/PageWithHeader.vue";
 export default  {
-  name: 'ShoppingList',
+  name: 'ShoppingListView',
   components: { PageWithHeader }
 }
 </script>

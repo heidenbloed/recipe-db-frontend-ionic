@@ -1,5 +1,5 @@
 <template>
-  <IonCard :href="detailUrl? detailUrl + id: 'javascript:'">
+  <IonCard @click="detailUrl && $router.push(detailUrl+id+'/')">
     <IonCardHeader>
       <IonCardTitle>
         <span v-if="title">{{title}}</span>
