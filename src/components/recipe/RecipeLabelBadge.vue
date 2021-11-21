@@ -1,52 +1,46 @@
 <template>
-  <div class="badge" :style="backgroundStyle">
+  <n-tag :color="tagColor">
     <slot>
       {{category}}
     </slot>
-  </div>
+  </n-tag>
 </template>
 
 <script lang="js">
   import { defineComponent } from 'vue';
+  import { 
+    NTag
+  } from 'naive-ui';
+
   export default defineComponent({
     name: 'RecipeLabelBadge',
-    components: {},
+    components: { NTag },
     props: {
       category: String,
     },
     computed: {
-      backgroundStyle() {
-        let bgcolor = undefined;
+      tagColor() {
+        let textColor = undefined;
+        let backgroundColor = undefined;
         if (this.category === "complexity") {
-          bgcolor = '#ff7675';
+          textColor='#ff7675';
+          backgroundColor="#ffdbdb";
         } else if (this.category === "diet") {
-          bgcolor = '#00b894';
-        }else if (this.category === "cuisine") {
-          bgcolor = '#fdcb6e';
+          textColor='#00b894';
+          backgroundColor="#d8f8f2";
+        } else if (this.category === "cuisine") {
+          textColor="#FCB040";
+          backgroundColor="#feefd7"
+        } else {
+          textColor="#3880FF";
+          backgroundColor="#e5efff";
         }
-        if (bgcolor) {
-          return { background: bgcolor }
-        } else{
-          return {}
+        return {
+          color: backgroundColor,
+          borderColor: textColor,
+          textColor: textColor
         }
       }
     },
   })
 </script>
-
-<style scoped>
-  div.badge {
-    display: inline-block;
-    border-radius: 0.35em;
-    background: var(--ion-color-primary);
-    color: white;
-    font-weight: bold;
-    padding-right: 0.5em;
-    padding-left: 0.5em;
-    padding-top: 0.3em;
-    padding-bottom: 0.3em;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
-    font-size: small;
-  }
-</style>

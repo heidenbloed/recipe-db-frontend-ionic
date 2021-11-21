@@ -24,9 +24,11 @@
 
       <p class="section">Schlagwörter</p>
       <ion-skeleton-text v-if="!recipeData.labels" animated/>
-      <RecipeLabelBadge v-for="label in recipeData.labels" :key="label.id" :category="label.category">
-        {{label.name}}
-      </RecipeLabelBadge>
+      <n-space>
+        <RecipeLabelBadge v-for="label in recipeData.labels" :key="label.id" :category="label.category">
+          {{label.name}}
+        </RecipeLabelBadge>
+      </n-space>
     </ion-content>
   </PageWithHeader>
 </template>
@@ -39,8 +41,13 @@
   import RecipeImageSlides from "@/components/recipe/RecipeImageSlides.vue"
   import { defineComponent } from 'vue';
   import { IonContent, IonSkeletonText, IonButtons, IonButton, IonIcon } from '@ionic/vue';
+  import {
+    NSpace
+  } from 'naive-ui';
   import { bookOutline, pencilOutline } from 'ionicons/icons';
-  import { getRecipeData } from '@/api/recipeDetails' 
+  import { getRecipeData } from '@/api/recipeDetails';
+
+
   export default defineComponent({
     name: 'RecipeDetail',
     components: {
@@ -54,6 +61,7 @@
       IonSkeletonText,
       RecipeLabelBadge,
       RecipeImageSlides,
+      NSpace
     },
     props: {
       id: {
@@ -78,7 +86,8 @@
       },
       recipeImageUrls() {
         if (this.recipeData.images) {
-          return this.recipeData.images.map((imgData) => {return imgData.imageUrl});
+          const sortedImages = [...this.recipeData.images].sort((elemA, elemB) => {return elemA.order - elemB.order });
+          return sortedImages.map((imgData) => {return imgData.imageUrl});
         } else {
           return undefined;
         }
